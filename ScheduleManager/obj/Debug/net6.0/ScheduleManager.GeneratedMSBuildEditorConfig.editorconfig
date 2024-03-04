@@ -1,0 +1,111 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ScheduleManager
+build_property.RootNamespace = ScheduleManager
+build_property.ProjectDir = D:\SPRING2024\PRN221\realProject\ScheduleManager\ScheduleManager\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\SPRING2024\PRN221\realProject\ScheduleManager\ScheduleManager
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/File/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmlsZVxSZWFkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Room/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Room/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Room/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Room/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Room/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Slot/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2xvdFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Slot/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2xvdFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Slot/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2xvdFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Slot/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2xvdFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Slot/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2xvdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Subject/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3ViamVjdFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Subject/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3ViamVjdFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Subject/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3ViamVjdFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Subject/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3ViamVjdFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Subject/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3ViamVjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-zhos3uc4us
