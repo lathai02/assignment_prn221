@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ScheduleManager.Models
 {
-    public partial class Class
+    public partial class GroupClass
     {
-        public Class()
+        public GroupClass()
         {
             Schedules = new HashSet<Schedule>();
         }

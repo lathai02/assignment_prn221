@@ -18,6 +18,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\SPRING2024\PRN221\realProject\ScheduleManager\ScheduleManager
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Class/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xhc3NcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Class/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xhc3NcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Class/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xhc3NcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Class/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xhc3NcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Class/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xhc3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -96,6 +116,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Subject/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3ViamVjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Teacher/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlclxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Teacher/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlclxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Teacher/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlclxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Teacher/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlclxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/Teacher/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/SPRING2024/PRN221/realProject/ScheduleManager/ScheduleManager/Pages/_ViewImports.cshtml]

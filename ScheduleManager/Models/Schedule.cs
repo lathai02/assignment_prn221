@@ -13,7 +13,7 @@ namespace ScheduleManager.Models
         public int TimeSlotId { get; set; }
         public DateTime Date { get; set; }
 
-        public virtual Class Class { get; set; } = null!;
+        public virtual GroupClass Class { get; set; } = null!;
         public virtual Room Room { get; set; } = null!;
         public virtual Subject Subject { get; set; } = null!;
         public virtual Teacher Teacher { get; set; } = null!;
