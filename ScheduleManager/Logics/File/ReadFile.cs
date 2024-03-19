@@ -1,43 +1,46 @@
-﻿using ScheduleManager.Models.DTO;
+﻿using ScheduleManager.Logics.CheckValidRecord;
+using ScheduleManager.Models.DTO;
+using System.Security.Claims;
 
 namespace ScheduleManager.Logics.File
 {
     public class ReadFile
     {
-        List<RootData> RootDatas { get; set; }
-        List<RootData> DataError { get; set; }
+        public List<RootData>? _ListRootData { get; set; }
+        public List<RootData>? _DataError { get; set; }
+
+
 
         public void Read(string filePath)
         {
-            RootDatas = new List<RootData>();
+            _ListRootData = new List<RootData>();
+            _DataError = new List<RootData>();
 
             using (StreamReader reader = new StreamReader(filePath))
             {
-                string line;
+                string? line;
 
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] values = line.Split(',');
 
-
-
-
-
-
-
-
-
-                    if (values.Length > 0 && values.Length < 6)
+                    CheckValid cv = new CheckValid(values, _ListRootData);
+                    var isValidRecord = cv.Condition();
+                    RootData rd = new RootData
                     {
-                        RootData data = new RootData
-                        {
-                            Class = values[0],
-                            Subject = values[1],
-                            Room = values[2],
-                            Teacher = values[3],
-                            TimeSlot = values[4],
-                        };
-                        RootDatas.Add(data);
+                        Class = values[0],
+                        Subject = values[1],
+                        Room = values[2],
+                        Teacher = values[3],
+                        TimeSlot = values[4],
+                    };
+                    if (isValidRecord)
+                    {
+                        _ListRootData.Add(rd);
+                    }
+                    else
+                    {
+                        _DataError.Add(rd);
                     }
                 }
             }
