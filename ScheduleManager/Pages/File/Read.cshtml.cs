@@ -1,13 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ScheduleManager.Logics.File;
 using ScheduleManager.Models.DTO;
 
 namespace ScheduleManager.Pages.File
 {
     public class ReadModel : PageModel
     {
-        [BindProperty]
-        public string? FilePath { get; set; }
+        private readonly IWebHostEnvironment _environment;
+
+        public ReadModel(IWebHostEnvironment environment)
+        {
+            _environment = environment;
+        }
+
+        public IFormFile UploadedFile { get; set; }
 
         List<RootData>? ValidData { get; set; }
 
@@ -17,20 +24,33 @@ namespace ScheduleManager.Pages.File
         {
         }
 
-        public void OnPost()
+        public async Task OnPost(IFormFile UploadedFile)
         {
-            if (FilePath != null)
+            try
             {
-                
+                if (UploadedFile != null && UploadedFile.Length > 0)
+                {
+                    string tempFolderPath = Path.Combine(_environment.WebRootPath, "File");
+                    Directory.CreateDirectory(tempFolderPath);
+                    string filePath = Path.Combine(tempFolderPath, UploadedFile.FileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await UploadedFile.CopyToAsync(fileStream);
+                    }
+
+                    ReadFile rf = new ReadFile();
+                    rf.Read(filePath);
+                }
+                else
+                {
+                    RedirectToPage();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                RedirectToPage();
+                throw new Exception(ex.Message);
             }
         }
-
-
-
-
     }
 }

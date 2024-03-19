@@ -4,7 +4,7 @@ namespace ScheduleManager.Logics.File
 {
     public class ReadFile
     {
-        List<RootData> RootDatas {  get; set; }
+        List<RootData> RootDatas { get; set; }
         List<RootData> DataError { get; set; }
 
         public void Read(string filePath)
@@ -26,17 +26,17 @@ namespace ScheduleManager.Logics.File
 
 
 
-                    foreach (string value in values)
+
+                    if (values.Length > 0 && values.Length < 6)
                     {
                         RootData data = new RootData
                         {
-                            Class = value,
-                            Subject = value,
-                            Room = value,
-                            Teacher = value,
-                            TimeSlot = value,
+                            Class = values[0],
+                            Subject = values[1],
+                            Room = values[2],
+                            Teacher = values[3],
+                            TimeSlot = values[4],
                         };
-
                         RootDatas.Add(data);
                     }
                 }

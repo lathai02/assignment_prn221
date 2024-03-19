@@ -2,9 +2,9 @@
 @model ScheduleManager.Pages.File.ReadModel
 
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <label>Enter file path:</label>
-    <input asp-for="FilePath" />
+    <input type="file" asp-for="UploadedFile" />
 
     <input type="submit" value="Enter" />
 </form>
