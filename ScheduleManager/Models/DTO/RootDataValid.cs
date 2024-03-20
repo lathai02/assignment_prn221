@@ -1,6 +1,8 @@
-﻿namespace ScheduleManager.Models.DTO
+﻿using ScheduleManager.Models.Interface;
+
+namespace ScheduleManager.Models.DTO
 {
-    public class RootData
+    public class RootDataValid : IRootData
     {
         public string? Class { get; set; }
         public string? Subject { get; set; }

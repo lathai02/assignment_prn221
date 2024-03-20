@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using ScheduleManager.Logics.File;
 using ScheduleManager.Models.DTO;
 
@@ -16,15 +17,14 @@ namespace ScheduleManager.Pages.File
 
         public IFormFile? UploadedFile { get; set; }
 
-        List<RootData>? ValidData { get; set; }
-
-        List<RootData>? DataError { get; set; }
+        List<RootDataValid>? ValidData { get; set; }
+        List<RootDataError>? ErrorData { get; set; }
 
         public void OnGet()
         {
         }
 
-        public async Task OnPost(IFormFile UploadedFile)
+        public async Task<IActionResult> OnPost(IFormFile UploadedFile)
         {
             if (UploadedFile != null && UploadedFile.Length > 0)
             {
@@ -40,12 +40,17 @@ namespace ScheduleManager.Pages.File
                 ReadFile rf = new ReadFile();
                 rf.Read(filePath);
                 ValidData = rf._ListRootData;
-                DataError = rf._DataError;
-                RedirectToPage("/File/ResultDemo");
+                ErrorData = rf._DataError;
+
+                TempData["Message"] = "File uploaded successfully.";
+                TempData["ValidData"] = JsonConvert.SerializeObject(ValidData);
+                TempData["DataError"] = JsonConvert.SerializeObject(ErrorData);
+                return RedirectToPage("/File/ResultDemo");
             }
             else
             {
-                RedirectToPage("/File/Read");
+                TempData["ErrorMessage"] = "File upload failed.";
+                return RedirectToPage("/File/Read");
             }
         }
     }

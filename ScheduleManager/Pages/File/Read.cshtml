@@ -8,3 +8,8 @@
 
     <input type="submit" value="Enter" />
 </form>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
