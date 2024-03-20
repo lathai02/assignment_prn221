@@ -10,9 +10,12 @@ namespace ScheduleManager.Pages.File
     {
         private readonly IWebHostEnvironment _environment;
 
-        public ReadModel(IWebHostEnvironment environment)
+        private readonly ReadFile _readFile;
+
+        public ReadModel(IWebHostEnvironment environment, ReadFile readFile)
         {
             _environment = environment;
+            _readFile = readFile;
         }
 
         public IFormFile? UploadedFile { get; set; }
@@ -37,10 +40,9 @@ namespace ScheduleManager.Pages.File
                     await UploadedFile.CopyToAsync(fileStream);
                 }
 
-                ReadFile rf = new ReadFile();
-                rf.Read(filePath);
-                ValidData = rf._ListRootData;
-                ErrorData = rf._DataError;
+                _readFile.Read(filePath);
+                ValidData = _readFile._ListRootData;
+                ErrorData = _readFile._DataError;
 
                 TempData["Message"] = "File uploaded successfully.";
                 TempData["ValidData"] = JsonConvert.SerializeObject(ValidData);
