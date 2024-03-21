@@ -1,16 +1,16 @@
-﻿using ScheduleManager.Models.DTO;
+﻿using ScheduleManager.Models;
+using ScheduleManager.Models.DTO;
 
 namespace ScheduleManager.Logics.InsertToDatabase
 {
     public class InsertToDB
     {
-        public List<RootDataValid>? _ListRootData { get; set; }
+        private readonly ScheduleManagerContext _context;
 
-
-        public InsertToDB() {
-
+        public InsertToDB(ScheduleManagerContext context)
+        {
+            _context = context;
         }
-
 
 
     }

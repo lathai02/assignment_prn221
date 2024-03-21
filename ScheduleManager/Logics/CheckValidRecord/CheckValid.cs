@@ -6,7 +6,7 @@ namespace ScheduleManager.Logics.CheckValidRecord
 {
     public class CheckValid
     {
-        private ScheduleManagerContext _context { get; set; }
+        private readonly ScheduleManagerContext _context;
 
         public CheckValid(ScheduleManagerContext context)
         {

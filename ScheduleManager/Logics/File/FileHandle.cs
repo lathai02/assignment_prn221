@@ -5,13 +5,15 @@ using System.Security.Claims;
 
 namespace ScheduleManager.Logics.File
 {
-    public class ReadFile
+    public class FileHandle
     {
-        private CheckValid _checkValid { get; set; }
+        private readonly CheckValid _checkValid;
+        private readonly IWebHostEnvironment _environment;
 
-        public ReadFile(CheckValid checkValid)
+        public FileHandle(CheckValid checkValid, IWebHostEnvironment environment)
         {
             _checkValid = checkValid;
+            _environment = environment;
         }
 
         public (List<RootDataValid>?, List<RootDataError>?) Read(string filePath)
@@ -79,6 +81,20 @@ namespace ScheduleManager.Logics.File
 
                 return (listRootData, listDataError);
             }
+        }
+
+        public async Task<string> Import(IFormFile UploadedFile)
+        {
+            string tempFolderPath = Path.Combine(_environment.WebRootPath, "File");
+            Directory.CreateDirectory(tempFolderPath);
+            string filePath = Path.Combine(tempFolderPath, UploadedFile.FileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await UploadedFile.CopyToAsync(fileStream);
+            }
+
+            return filePath;
         }
     }
 }

@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<ReadFile>();
+builder.Services.AddScoped<FileHandle>();
 builder.Services.AddScoped<CheckValid>();
 builder.Services.AddDbContext<ScheduleManagerContext>(
     opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MyConnectionString"))
