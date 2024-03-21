@@ -10,5 +10,6 @@ namespace ScheduleManager.Models.DTO
         public string? Room { get; set; }
         public string? Teacher { get; set; }
         public string? TimeSlot { get; set; }
+        public string? MissData { get; set; } = null;
     }
 }

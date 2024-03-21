@@ -9,7 +9,7 @@ namespace ScheduleManager.Logics.CheckValidRecord
         public string[] _CurrentRecord { get; set; }
         public List<RootDataValid> _ListRootData { get; set; }
         public string? Message { get; set; } = null;
-
+        public bool Flag { get; set; } = false;
         private ScheduleManagerContext _context { get; set; }
 
         public CheckValid(string[] CurrentRecord, List<RootDataValid> ListRootData, ScheduleManagerContext context)
@@ -28,8 +28,9 @@ namespace ScheduleManager.Logics.CheckValidRecord
                 // not enough property
                 if (_CurrentRecord.Length != 5)
                 {
+                    Flag = true;
                     Message = "not enough property";
-                    result = false;
+                    return false;
                 }
 
                 // same class, same subject

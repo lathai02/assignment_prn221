@@ -28,6 +28,13 @@
 {
     foreach (var item in dataError)
     {
-        <div>@item.Class - @item.Subject - @item.Room - @item.Teacher - @item.TimeSlot (@item.Message)</div>
+        if (item.MissData == null)
+        {
+            <div>@item.Class,@item.Subject,@item.Room,@item.Teacher,@item.TimeSlot (@item.Message)</div>
+        }
+        else
+        {
+            <div>@item.MissData (@item.Message)</div>
+        }
     }
 }
