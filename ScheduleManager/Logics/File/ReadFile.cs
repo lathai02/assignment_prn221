@@ -7,20 +7,17 @@ namespace ScheduleManager.Logics.File
 {
     public class ReadFile
     {
-        public List<RootDataValid>? _ListRootData { get; set; }
-        public List<RootDataError>? _DataError { get; set; }
+        private CheckValid _checkValid { get; set; }
 
-        private ScheduleManagerContext _context { get; set; }
-
-        public ReadFile(ScheduleManagerContext context)
+        public ReadFile(CheckValid checkValid)
         {
-            _context = context;
+            _checkValid = checkValid;
         }
 
-        public void Read(string filePath)
+        public (List<RootDataValid>?, List<RootDataError>?) Read(string filePath)
         {
-            _ListRootData = new List<RootDataValid>();
-            _DataError = new List<RootDataError>();
+            List<RootDataValid>? listRootData = new List<RootDataValid>();
+            List<RootDataError>? listDataError = new List<RootDataError>();
 
             using (StreamReader reader = new StreamReader(filePath))
             {
@@ -29,11 +26,9 @@ namespace ScheduleManager.Logics.File
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] values = line.Split(',');
+                    var result = _checkValid.Condition(values, listRootData);
 
-                    CheckValid cv = new CheckValid(values, _ListRootData, _context);
-                    var isValidRecord = cv.Condition();
-
-                    if (isValidRecord)
+                    if (result.Item1)
                     {
                         RootDataValid rd = new RootDataValid
                         {
@@ -43,17 +38,17 @@ namespace ScheduleManager.Logics.File
                             Teacher = values[3],
                             TimeSlot = values[4],
                         };
-                        _ListRootData.Add(rd);
+                        listRootData.Add(rd);
                     }
                     else
                     {
                         RootDataError? rd = null;
-                        if (cv.Flag)
+                        if (result.Item3)
                         {
                             rd = new RootDataError
                             {
                                 MissData = string.Join(",", values),
-                                Message = cv.Message ?? "loi roi"
+                                Message = result.Item2 ?? "loi roi"
                             };
                         }
                         else
@@ -65,12 +60,24 @@ namespace ScheduleManager.Logics.File
                                 Room = values[2] ?? "",
                                 Teacher = values[3] ?? "",
                                 TimeSlot = values[4] ?? "",
-                                Message = cv.Message ?? "loi roi"
+                                Message = result.Item2 ?? "loi roi"
                             };
                         }
-                        _DataError.Add(rd);
+                        listDataError.Add(rd);
                     }
                 }
+
+
+
+
+
+
+
+
+
+
+
+                return (listRootData, listDataError);
             }
         }
     }

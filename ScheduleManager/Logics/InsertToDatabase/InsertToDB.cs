@@ -7,8 +7,8 @@ namespace ScheduleManager.Logics.InsertToDatabase
         public List<RootDataValid>? _ListRootData { get; set; }
 
 
-        public InsertToDB(List<RootDataValid>? ListRootData) {
-            _ListRootData = ListRootData;
+        public InsertToDB() {
+
         }
 
 

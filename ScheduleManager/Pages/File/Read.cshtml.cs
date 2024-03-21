@@ -40,9 +40,9 @@ namespace ScheduleManager.Pages.File
                     await UploadedFile.CopyToAsync(fileStream);
                 }
 
-                _readFile.Read(filePath);
-                ValidData = _readFile._ListRootData;
-                ErrorData = _readFile._DataError;
+               var result = _readFile.Read(filePath);
+                ValidData = result.Item1;
+                ErrorData = result.Item2;
 
                 TempData["Message"] = "File uploaded successfully.";
                 TempData["ValidData"] = JsonConvert.SerializeObject(ValidData);

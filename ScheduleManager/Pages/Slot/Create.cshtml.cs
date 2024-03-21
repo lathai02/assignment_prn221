@@ -25,12 +25,12 @@ namespace ScheduleManager.Pages.Slot
 
         [BindProperty]
         public Models.Slot Slot { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Slots == null || Slot == null)
+            if (!ModelState.IsValid || _context.Slots == null || Slot == null)
             {
                 return Page();
             }
