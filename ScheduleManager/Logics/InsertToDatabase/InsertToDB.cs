@@ -15,11 +15,58 @@ namespace ScheduleManager.Logics.InsertToDatabase
 
         public void InsertData(List<RootDataValid> listDataValid)
         {
+            List<DataOneWeek> dataOneWeek = new List<DataOneWeek>();
+
             foreach (var item in listDataValid)
             {
                 char[] characters = item.TimeSlot.ToCharArray();
 
+                var timeSlotDetail = GetTimeSlotDetail(characters);
+                DataOneWeek dow1 = new DataOneWeek
+                {
+                    Class = item.Class,
+                    Subject = item.Subject,
+                    Teacher = item.Teacher,
+                    Room = item.Room,
+                    DayOfWeek = timeSlotDetail.Item2,
+                    Slot = timeSlotDetail.Item1
+                };
 
+                DataOneWeek dow2 = new DataOneWeek
+                {
+                    Class = item.Class,
+                    Subject = item.Subject,
+                    Teacher = item.Teacher,
+                    Room = item.Room,
+                    DayOfWeek = timeSlotDetail.Item4,
+                    Slot = timeSlotDetail.Item3
+                };
+
+                dataOneWeek.Add(dow1);
+                dataOneWeek.Add(dow2);
+            }
+
+
+
+        }
+
+        private List<string> GetListTeacherFromDataInput(List<DataOneWeek> dataOneWeek)
+        {
+            return dataOneWeek.Select(x => x.Teacher).Distinct().ToList();
+        }
+        private void DivideScheduleByTeacher(List<DataOneWeek> dataOneWeek)
+        {
+            var listTeacher = GetListTeacherFromDataInput(dataOneWeek);
+
+            Dictionary<string, DataOneWeek> scheduleByTeacher = new Dictionary<string, DataOneWeek>();
+
+
+            foreach (var teacher in listTeacher)
+            {
+                foreach (var item in dataOneWeek)
+                {
+
+                }
             }
         }
 
