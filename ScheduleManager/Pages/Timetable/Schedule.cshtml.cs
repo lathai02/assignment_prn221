@@ -17,7 +17,7 @@ namespace ScheduleManager.Pages.Timetable
         public List<string> listDateRangeOneWeek { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public DateRange dateRange { get; set; }
+        public DateTime startDateRange { get; set; }
 
         public ScheduleModel(ScheduleManagerContext context)
         {
@@ -30,11 +30,32 @@ namespace ScheduleManager.Pages.Timetable
             var endDate = _context.Schedules.Max(s => s.Date);
             var weeks = GetDateRange(startDate, endDate);
             listDateRange = new SelectList(weeks, nameof(DateRange.StartDate), nameof(DateRange.Range));
+            Slots = _context.Slots.ToList();
+
 
             DateTime startDateReal = findMonday(startDate);
             listDateRangeOneWeek = GetDateRangeOneWeek(startDateReal);
-            Slots = _context.Slots.ToList();
+
             Schedules = _context.Schedules.Include(sche => sche.Teacher).Include(sche => sche.Subject).Include(sche => sche.Room).Include(sche => sche.Class).Include(sche => sche.TimeSlot).Where(s => s.Date >= startDateReal && s.Date <= startDateReal.AddDays(6)).ToList();
+        }
+
+        public void OnPost()
+        {
+            var startDate = _context.Schedules.Min(s => s.Date);
+            var endDate = _context.Schedules.Max(s => s.Date);
+            var weeks = GetDateRange(startDate, endDate);
+            listDateRange = new SelectList(weeks, nameof(DateRange.StartDate), nameof(DateRange.Range));
+            listDateRangeOneWeek = GetDateRangeOneWeek(startDateRange);
+            Slots = _context.Slots.ToList();
+
+            IQueryable<Schedule> query = _context.Schedules.Include(sche => sche.Teacher).Include(sche => sche.Subject).Include(sche => sche.Room).Include(sche => sche.Class).Include(sche => sche.TimeSlot);
+
+            if (startDateRange != null)
+            {
+                query = query.Where(sche => sche.Date >= startDateRange && sche.Date <= startDateRange.AddDays(6));
+            }
+
+            Schedules = query.ToList();
         }
 
         private List<string> GetDateRangeOneWeek(DateTime startDate)

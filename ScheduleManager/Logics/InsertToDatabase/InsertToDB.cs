@@ -56,7 +56,6 @@ namespace ScheduleManager.Logics.InsertToDatabase
         {
             List<Schedule> timeTable = new List<Schedule>();
 
-            int weekExtraSlot = 0;
             for (int i = 0; i < numberOfWeek; i++)
             {
                 for (int j = 0; j < dataOneWeek.Count(); j++)

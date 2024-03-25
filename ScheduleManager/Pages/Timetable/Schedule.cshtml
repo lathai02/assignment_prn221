@@ -7,7 +7,13 @@
     }
 </style>
 
-<select asp-items="@Model.listDateRange" asp-for="@Model.dateRange"></select>
+<form method="post">
+    <select asp-items="@Model.listDateRange" asp-for="@Model.startDateRange"></select>
+
+
+    <button type="submit">Filter</button>
+</form>
+
 
 <table>
     <tr>
@@ -40,14 +46,14 @@
                         @foreach (var sche in schedules)
                         {
                             @sche.TimeSlot.Details
-                            <br>
-                            @sche.Teacher.Name
+                            <span>-</span>
+                            @sche.Class.Name
                             <br>
                             @sche.Room.Name
-                            <br>
+                            <span>-</span>
                             @sche.Subject.Name
                             <br>
-                            @sche.Class.Name
+                            @sche.Teacher.Name
                             @if (schedules.Count > 1)
                             {
                                 <div>----------</div>
