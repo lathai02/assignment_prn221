@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ScheduleManager.Models;
+using ScheduleManager.Models.DTO;
 using static System.Reflection.Metadata.BlobBuilder;
 
 namespace ScheduleManager.Pages.Timetable
@@ -15,6 +16,9 @@ namespace ScheduleManager.Pages.Timetable
         public SelectList listDateRange { get; set; }
         public List<string> listDateRangeOneWeek { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public DateRange dateRange { get; set; }
+
         public ScheduleModel(ScheduleManagerContext context)
         {
             _context = context;
@@ -25,7 +29,8 @@ namespace ScheduleManager.Pages.Timetable
             var startDate = _context.Schedules.Min(s => s.Date);
             var endDate = _context.Schedules.Max(s => s.Date);
             var weeks = GetDateRange(startDate, endDate);
-            listDateRange = new SelectList(weeks);
+            listDateRange = new SelectList(weeks, nameof(DateRange.StartDate), nameof(DateRange.Range));
+
             DateTime startDateReal = findMonday(startDate);
             listDateRangeOneWeek = GetDateRangeOneWeek(startDateReal);
             Slots = _context.Slots.ToList();
@@ -44,30 +49,41 @@ namespace ScheduleManager.Pages.Timetable
             return dateRangeOneWeek;
         }
 
-        private List<string> GetDateRange(DateTime startDate, DateTime endDate)
+        private List<DateRange> GetDateRange(DateTime startDate, DateTime endDate)
         {
 
-            List<string> weeks = new List<string>();
+            List<DateRange> weeks = new List<DateRange>();
             DateTime startDateReal = findMonday(startDate);
 
             TimeSpan span = findSunday(endDate) - startDateReal;
             int totalWeeks = span.Days / 7;
 
             string currentWeek = "";
+
             DateTime currentWeekStart = startDateReal;
             DateTime currentWeekEnd = startDateReal.AddDays(6);
             currentWeek = currentWeekStart.ToString("dd/MM/yyyy") + " - " + currentWeekEnd.ToString("dd/MM/yyyy");
-
-            weeks.Add(currentWeek);
+            DateRange dr = new DateRange
+            {
+                Range = currentWeek,
+                StartDate = currentWeekStart,
+                EndDate = currentWeekEnd,
+            };
+            weeks.Add(dr);
 
             for (int i = 0; i < totalWeeks; i++)
             {
                 currentWeekStart = currentWeekStart.AddDays(7);
                 currentWeekEnd = currentWeekStart.AddDays(6);
-
                 currentWeek = currentWeekStart.ToString("dd/MM/yyyy") + " - " + currentWeekEnd.ToString("dd/MM/yyyy");
 
-                weeks.Add(currentWeek);
+                DateRange drFor = new DateRange
+                {
+                    Range = currentWeek,
+                    StartDate = currentWeekStart,
+                    EndDate = currentWeekEnd,
+                };
+                weeks.Add(drFor);
             }
 
             return weeks;
