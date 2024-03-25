@@ -34,7 +34,7 @@ namespace ScheduleManager.Pages.Timetable
             DateTime startDateReal = findMonday(startDate);
             listDateRangeOneWeek = GetDateRangeOneWeek(startDateReal);
             Slots = _context.Slots.ToList();
-            Schedules = _context.Schedules.Include(sche => sche.Teacher).Include(sche => sche.Subject).Include(sche => sche.Room).Include(sche => sche.TimeSlot).Where(s => s.Date >= startDateReal && s.Date <= startDateReal.AddDays(6)).ToList();
+            Schedules = _context.Schedules.Include(sche => sche.Teacher).Include(sche => sche.Subject).Include(sche => sche.Room).Include(sche => sche.Class).Include(sche => sche.TimeSlot).Where(s => s.Date >= startDateReal && s.Date <= startDateReal.AddDays(6)).ToList();
         }
 
         private List<string> GetDateRangeOneWeek(DateTime startDate)
