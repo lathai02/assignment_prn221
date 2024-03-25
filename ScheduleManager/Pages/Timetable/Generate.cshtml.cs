@@ -14,7 +14,7 @@ namespace ScheduleManager.Pages.Timetable
         {
             _insertToDb = insertToDb;
         }
-        public List<RootDataValid> ValidData { get; set; }
+        public List<Models.RootDataValid> ValidData { get; set; }
 
         [BindProperty]
         public string ValidDataClone { get; set; }
@@ -29,12 +29,12 @@ namespace ScheduleManager.Pages.Timetable
         public void OnGet()
         {
             string validDataJson = TempData["ValidData"] as string;
-            ValidData = JsonConvert.DeserializeObject<List<RootDataValid>>(validDataJson);
+            ValidData = JsonConvert.DeserializeObject<List<Models.RootDataValid>>(validDataJson);
         }
 
         public IActionResult OnPost()
         {
-            _insertToDb.InsertData(JsonConvert.DeserializeObject<List<RootDataValid>>(ValidDataClone), NumberOfWeek, StartDate);
+            _insertToDb.InsertData(JsonConvert.DeserializeObject<List<Models.RootDataValid>>(ValidDataClone), NumberOfWeek, StartDate);
 
             return RedirectToPage("/Timetable/Schedule");
         }

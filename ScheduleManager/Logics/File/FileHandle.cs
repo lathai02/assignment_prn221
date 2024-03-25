@@ -18,9 +18,9 @@ namespace ScheduleManager.Logics.File
             _environment = environment;
         }
 
-        public (List<RootDataValid>?, List<RootDataError>?) Read(string filePath)
+        public (List<Models.RootDataValid>?, List<RootDataError>?) Read(string filePath)
         {
-            List<RootDataValid>? listRootData = new List<RootDataValid>();
+            List<Models.RootDataValid>? listRootData = new List<Models.RootDataValid>();
             List<RootDataError>? listDataError = new List<RootDataError>();
 
             using (StreamReader reader = new StreamReader(filePath))
@@ -34,7 +34,7 @@ namespace ScheduleManager.Logics.File
 
                     if (result.Item1)
                     {
-                        RootDataValid rd = new RootDataValid
+                        Models.RootDataValid rd = new Models.RootDataValid
                         {
                             Class = values[0],
                             Subject = values[1],

@@ -18,6 +18,7 @@ namespace ScheduleManager.Models
 
         public virtual DbSet<GroupClass> GroupClasses { get; set; } = null!;
         public virtual DbSet<Room> Rooms { get; set; } = null!;
+        public virtual DbSet<RootDataValid> RootDataValids { get; set; } = null!;
         public virtual DbSet<Schedule> Schedules { get; set; } = null!;
         public virtual DbSet<Slot> Slots { get; set; } = null!;
         public virtual DbSet<Subject> Subjects { get; set; } = null!;
@@ -27,8 +28,8 @@ namespace ScheduleManager.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var ConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("MyConnectionString");
-                optionsBuilder.UseSqlServer(ConnectionString);
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server =(local); database = ScheduleManager;uid=sa;pwd=1234;");
             }
         }
 
@@ -52,6 +53,13 @@ namespace ScheduleManager.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)
                     .HasColumnName("name");
+            });
+
+            modelBuilder.Entity<RootDataValid>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("RootDataValid");
             });
 
             modelBuilder.Entity<Schedule>(entity =>

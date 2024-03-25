@@ -1,11 +1,12 @@
 ﻿@page
 @model ScheduleManager.Pages.File.ResultDemoModel
+@using ScheduleManager.Models
 @using ScheduleManager.Models.DTO
 @using Newtonsoft.Json
 
 
 @{
-    List<RootDataValid>? validData = JsonConvert.DeserializeObject<List<RootDataValid>>(TempData["ValidData"].ToString());
+    List<Models.RootDataValid>? validData = JsonConvert.DeserializeObject<List<Models.RootDataValid>>(TempData["ValidData"].ToString());
     List<RootDataError>? dataError = JsonConvert.DeserializeObject<List<RootDataError>>(TempData["DataError"].ToString());
 }
 

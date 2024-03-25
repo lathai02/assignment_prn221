@@ -13,7 +13,7 @@ namespace ScheduleManager.Logics.CheckValidRecord
             _context = context;
         }
 
-        public (bool, string?, bool) Condition(string[] _CurrentRecord, List<RootDataValid> _ListRootData)
+        public (bool, string?, bool) Condition(string[] _CurrentRecord, List<Models.RootDataValid> _ListRootData)
         {
             string? message = "";
             bool isValid = true;

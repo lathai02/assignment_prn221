@@ -17,7 +17,7 @@ namespace ScheduleManager.Pages.File
 
         public IFormFile? UploadedFile { get; set; }
 
-        List<RootDataValid>? ValidData { get; set; }
+        List<Models.RootDataValid>? ValidData { get; set; }
         List<RootDataError>? ErrorData { get; set; }
 
         public void OnGet()
