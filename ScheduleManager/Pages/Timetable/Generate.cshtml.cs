@@ -1,16 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using ScheduleManager.Logics.InsertToDatabase;
 using ScheduleManager.Models.DTO;
 
 namespace ScheduleManager.Pages.Timetable
 {
     public class GenerateModel : PageModel
     {
-        public List<RootDataValid>? ValidData { get; set; }
+        private readonly InsertToDB _insertToDb;
+
+        public GenerateModel(InsertToDB insertToDb)
+        {
+            _insertToDb = insertToDb;
+        }
+        public List<RootDataValid> ValidData { get; set; }
 
         [BindProperty]
-        public string? ValidDataClone { get; set; }
+        public string ValidDataClone { get; set; }
+
+        [BindProperty]
+        public int NumberOfWeek { get; set; }
+
+        [BindProperty]
+        public DateTime StartDate { get; set; }
 
 
         public void OnGet()
@@ -19,9 +32,11 @@ namespace ScheduleManager.Pages.Timetable
             ValidData = JsonConvert.DeserializeObject<List<RootDataValid>>(validDataJson);
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
-            var a = ValidDataClone;
+            _insertToDb.InsertData(JsonConvert.DeserializeObject<List<RootDataValid>>(ValidDataClone), NumberOfWeek, StartDate);
+
+            return RedirectToPage("/Timetable/Schedule");
         }
     }
 }

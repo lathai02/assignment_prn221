@@ -13,7 +13,7 @@ namespace ScheduleManager.Logics.InsertToDatabase
             _context = context;
         }
 
-        public void InsertData(List<RootDataValid> listDataValid)
+        public void InsertData(List<RootDataValid> listDataValid, int numberOfWeek, DateTime startDate)
         {
             List<DataOneWeek> dataOneWeek = new List<DataOneWeek>();
 
@@ -46,25 +46,37 @@ namespace ScheduleManager.Logics.InsertToDatabase
                 dataOneWeek.Add(dow2);
             }
 
-            //AutoGenerateTimeTable();
+            var timeTable = AutoGenerateTimeTable(numberOfWeek, startDate, dataOneWeek);
 
+            _context.Schedules.AddRange(timeTable);
+            _context.SaveChanges();
         }
 
         private List<Schedule> AutoGenerateTimeTable(int numberOfWeek, DateTime startDate, List<DataOneWeek> dataOneWeek)
         {
             List<Schedule> timeTable = new List<Schedule>();
 
+            int weekExtraSlot = 0;
             for (int i = 0; i < numberOfWeek; i++)
             {
                 for (int j = 0; j < dataOneWeek.Count(); j++)
                 {
                     int dayToAdd = (int)dataOneWeek[j].DayOfWeek - (int)startDate.DayOfWeek + (i * 7);
 
-                    DateTime specificDate = startDate.AddDays(dayToAdd);
+                    DateTime specificDate = default;
+                    if (dayToAdd >= 0)
+                    {
+                        specificDate = startDate.AddDays(dayToAdd);
+                    }
+                    else
+                    {
+                        specificDate = startDate.AddDays(dayToAdd + (numberOfWeek * 7));
+                    }
 
                     var idTuple = GetId(dataOneWeek[j].Class, dataOneWeek[j].Room, dataOneWeek[j].Slot, dataOneWeek[j].Subject, dataOneWeek[j].Teacher);
 
-                    Schedule schedule = new Schedule {
+                    Schedule schedule = new Schedule
+                    {
                         ClassId = idTuple.Item1,
                         RoomId = idTuple.Item2,
                         TimeSlotId = idTuple.Item3,

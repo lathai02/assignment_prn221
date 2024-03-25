@@ -1,0 +1,63 @@
+﻿@page
+@model ScheduleManager.Pages.Timetable.ScheduleModel
+
+<style>
+    table, tr, th, td {
+        border: 1px solid black;
+    }
+</style>
+
+<select asp-item="Model.listDateRange"></select>
+
+<table>
+    <tr>
+        <th></th>
+        @foreach (var d in Model.listDateRangeOneWeek)
+        {
+            DateTime result;
+            DateTime.TryParseExact(@d, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out result);
+            <th>@result.DayOfWeek</th>
+        }
+    </tr>
+    <tr>
+        <th></th>
+        @foreach (var d in Model.listDateRangeOneWeek)
+        {
+            <th>@d</th>
+        }
+    </tr>
+
+    @foreach (var s in Model.Slots)
+    {
+        <tr>
+            <th>Slot @s.Slot1</th>
+            @foreach (var d in Model.listDateRangeOneWeek)
+            {
+                var schedules = Model.Schedules.Where(sch => sch.TimeSlot.Slot1 == s.Slot1 && sch.Date.ToString("dd-MM-yyyy").Equals(d)).ToList();
+                if (schedules.Count != 0)
+                {
+                    <td>
+                        @foreach (var sche in schedules)
+                        {
+                            @sche.TimeSlot.Details
+                            <br>
+                            @sche.Teacher.Name
+                            <br>
+                            @sche.Room.Name
+                            <br>
+                            @sche.Subject.Name
+                            @if (schedules.Count > 1)
+                            {
+                                <div>----------</div>
+                            }
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+            }
+        </tr>
+    }
+</table>
