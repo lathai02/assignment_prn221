@@ -9,10 +9,17 @@
     List<RootDataError>? dataError = JsonConvert.DeserializeObject<List<RootDataError>>(TempData["DataError"].ToString());
 }
 
+
+
 @if (TempData["Message"] != null)
 {
     <div class="alert alert-success">@TempData["Message"]</div>
 }
+
+<form method="post">
+    <input type="hidden" name="validData" value="@JsonConvert.SerializeObject(validData)" />
+    <button type="submit">Generate Timetable</button>
+</form>
 
 <h1 style="color: green">Data Valid</h1>
 @if (TempData["ValidData"] != null)

@@ -46,28 +46,49 @@ namespace ScheduleManager.Logics.InsertToDatabase
                 dataOneWeek.Add(dow2);
             }
 
-
+            //AutoGenerateTimeTable();
 
         }
 
-        private List<string> GetListTeacherFromDataInput(List<DataOneWeek> dataOneWeek)
+        private List<Schedule> AutoGenerateTimeTable(int numberOfWeek, DateTime startDate, List<DataOneWeek> dataOneWeek)
         {
-            return dataOneWeek.Select(x => x.Teacher).Distinct().ToList();
-        }
-        private void DivideScheduleByTeacher(List<DataOneWeek> dataOneWeek)
-        {
-            var listTeacher = GetListTeacherFromDataInput(dataOneWeek);
+            List<Schedule> timeTable = new List<Schedule>();
 
-            Dictionary<string, DataOneWeek> scheduleByTeacher = new Dictionary<string, DataOneWeek>();
-
-
-            foreach (var teacher in listTeacher)
+            for (int i = 0; i < numberOfWeek; i++)
             {
-                foreach (var item in dataOneWeek)
+                for (int j = 0; j < dataOneWeek.Count(); j++)
                 {
+                    int dayToAdd = (int)dataOneWeek[j].DayOfWeek - (int)startDate.DayOfWeek + (i * 7);
 
+                    DateTime specificDate = startDate.AddDays(dayToAdd);
+
+                    var idTuple = GetId(dataOneWeek[j].Class, dataOneWeek[j].Room, dataOneWeek[j].Slot, dataOneWeek[j].Subject, dataOneWeek[j].Teacher);
+
+                    Schedule schedule = new Schedule {
+                        ClassId = idTuple.Item1,
+                        RoomId = idTuple.Item2,
+                        TimeSlotId = idTuple.Item3,
+                        SubjectId = idTuple.Item4,
+                        TeacherId = idTuple.Item5,
+                        Date = specificDate
+                    };
+
+                    timeTable.Add(schedule);
                 }
             }
+
+            return timeTable;
+        }
+
+        private (int, int, int, int, int) GetId(string className, string roomName, int? slotName, string subjectName, string teacherName)
+        {
+            int classId = _context.GroupClasses.FirstOrDefault(c => c.Name == className).Id;
+            int roomId = _context.Rooms.FirstOrDefault(r => r.Name == roomName).Id;
+            int slotId = _context.Slots.FirstOrDefault(s => s.Slot1 == slotName.ToString()).Id;
+            int subjectId = _context.Subjects.FirstOrDefault(sj => sj.Name == subjectName).Id;
+            int teacherId = _context.Teachers.FirstOrDefault(t => t.Name == teacherName).Id;
+
+            return (classId, roomId, slotId, subjectId, teacherId);
         }
 
         private (int?, DayOfWeek?, int?, DayOfWeek?) GetTimeSlotDetail(char[] characters)

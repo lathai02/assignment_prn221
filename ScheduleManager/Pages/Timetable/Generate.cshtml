@@ -1,0 +1,14 @@
+﻿@page
+@model ScheduleManager.Pages.Timetable.GenerateModel
+@using Newtonsoft.Json
+
+<form method="post">
+    <labbel>Enter number of week: </labbel>
+    <input type="number" />
+
+    <label>Choose start date</label>
+    <input type="date" />
+    <input value="@JsonConvert.SerializeObject(Model.ValidData)" type="hidden" asp-for="ValidDataClone" />
+    <button>Submit</button>
+</form>
+

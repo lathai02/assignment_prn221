@@ -2,6 +2,7 @@
 using ScheduleManager.Models;
 using ScheduleManager.Models.DTO;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace ScheduleManager.Logics.File
 {
@@ -9,6 +10,7 @@ namespace ScheduleManager.Logics.File
     {
         private readonly CheckValid _checkValid;
         private readonly IWebHostEnvironment _environment;
+
 
         public FileHandle(CheckValid checkValid, IWebHostEnvironment environment)
         {
@@ -68,16 +70,6 @@ namespace ScheduleManager.Logics.File
                         listDataError.Add(rd);
                     }
                 }
-
-
-
-
-
-
-
-
-
-
 
                 return (listRootData, listDataError);
             }
