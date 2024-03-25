@@ -18,6 +18,7 @@ namespace ScheduleManager.Models
 
         public virtual DbSet<GroupClass> GroupClasses { get; set; } = null!;
         public virtual DbSet<Room> Rooms { get; set; } = null!;
+        public virtual DbSet<RootDataError> RootDataErrors { get; set; } = null!;
         public virtual DbSet<RootDataValid> RootDataValids { get; set; } = null!;
         public virtual DbSet<Schedule> Schedules { get; set; } = null!;
         public virtual DbSet<Slot> Slots { get; set; } = null!;
@@ -53,6 +54,13 @@ namespace ScheduleManager.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)
                     .HasColumnName("name");
+            });
+
+            modelBuilder.Entity<RootDataError>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("RootDataError");
             });
 
             modelBuilder.Entity<RootDataValid>(entity =>
