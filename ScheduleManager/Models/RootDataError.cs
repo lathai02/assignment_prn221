@@ -5,6 +5,7 @@ namespace ScheduleManager.Models
 {
     public partial class RootDataError
     {
+        public int Id { get; set; }
         public string Message { get; set; } = null!;
         public string? Class { get; set; }
         public string? Subject { get; set; }

@@ -18,7 +18,7 @@ namespace ScheduleManager.Pages.File
         public IFormFile? UploadedFile { get; set; }
 
         List<Models.RootDataValid>? ValidData { get; set; }
-        List<RootDataError>? ErrorData { get; set; }
+        List<Models.RootDataError>? ErrorData { get; set; }
 
         public void OnGet()
         {
@@ -29,20 +29,13 @@ namespace ScheduleManager.Pages.File
             if (UploadedFile != null && UploadedFile.Length > 0)
             {
                 var filePath = await _readFile.Import(UploadedFile);
-                var result = _readFile.Read(filePath);
-                ValidData = result.Item1;
-                ErrorData = result.Item2;
-
-                TempData["Message"] = "File uploaded successfully.";
-                TempData["ValidData"] = JsonConvert.SerializeObject(ValidData);
-                TempData["DataError"] = JsonConvert.SerializeObject(ErrorData);
+                _readFile.Read(filePath);
 
                 return RedirectToPage("/File/ResultDemo");
             }
             else
             {
                 TempData["ErrorMessage"] = "File upload failed.";
-
                 return RedirectToPage("/File/Read");
             }
         }

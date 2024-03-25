@@ -58,16 +58,16 @@ namespace ScheduleManager.Models
 
             modelBuilder.Entity<RootDataError>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("RootDataError");
+
+                entity.Property(e => e.Id).HasColumnName("id");
             });
 
             modelBuilder.Entity<RootDataValid>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("RootDataValid");
+
+                entity.Property(e => e.Id).HasColumnName("id");
             });
 
             modelBuilder.Entity<Schedule>(entity =>

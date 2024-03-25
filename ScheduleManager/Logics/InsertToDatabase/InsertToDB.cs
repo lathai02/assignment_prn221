@@ -13,9 +13,10 @@ namespace ScheduleManager.Logics.InsertToDatabase
             _context = context;
         }
 
-        public void InsertData(List<Models.RootDataValid> listDataValid, int numberOfWeek, DateTime startDate)
+        public void InsertData( int numberOfWeek, DateTime startDate)
         {
             List<DataOneWeek> dataOneWeek = new List<DataOneWeek>();
+            List<RootDataValid> listDataValid = _context.RootDataValids.ToList();
 
             foreach (var item in listDataValid)
             {

@@ -1,48 +1,31 @@
 ﻿@page
 @model ScheduleManager.Pages.File.ResultDemoModel
 @using ScheduleManager.Models
-@using ScheduleManager.Models.DTO
-@using Newtonsoft.Json
 
+<div class="alert alert-success">File uploaded successfully.</div>
 
-@{
-    List<Models.RootDataValid>? validData = JsonConvert.DeserializeObject<List<Models.RootDataValid>>(TempData["ValidData"].ToString());
-    List<RootDataError>? dataError = JsonConvert.DeserializeObject<List<RootDataError>>(TempData["DataError"].ToString());
-}
-
-
-
-@if (TempData["Message"] != null)
-{
-    <div class="alert alert-success">@TempData["Message"]</div>
-}
 
 <form method="post">
-    <input type="hidden" name="validData" value="@JsonConvert.SerializeObject(validData)" />
     <button type="submit">Generate Timetable</button>
 </form>
 
 <h1 style="color: green">Data Valid</h1>
-@if (TempData["ValidData"] != null)
+
+@foreach (var item in Model.validData)
 {
-    foreach (var item in validData)
-    {
-        <div>@item.Class - @item.Subject - @item.Room - @item.Teacher - @item.TimeSlot</div>
-    }
+    <div>@item.Class - @item.Subject - @item.Room - @item.Teacher - @item.TimeSlot</div>
 }
 
 <h1 style="color:red">Data Error</h1>
-@if (TempData["DataError"] != null)
+
+@foreach (var item in Model.dataError)
 {
-    foreach (var item in dataError)
+    if (item.MissData == null)
     {
-        if (item.MissData == null)
-        {
-            <div>@item.Class,@item.Subject,@item.Room,@item.Teacher,@item.TimeSlot (@item.Message)</div>
-        }
-        else
-        {
-            <div>@item.MissData (@item.Message)</div>
-        }
+        <div>@item.Class,@item.Subject,@item.Room,@item.Teacher,@item.TimeSlot (@item.Message)</div>
+    }
+    else
+    {
+        <div>@item.MissData (@item.Message)</div>
     }
 }

@@ -8,7 +8,6 @@
     <br>
     <label>Choose start date</label>
     <input type="date" asp-for="StartDate" />
-    <input value="@JsonConvert.SerializeObject(Model.ValidData)" type="hidden" asp-for="ValidDataClone" />
     <br>
     <button>Submit</button>
 </form>

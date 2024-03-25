@@ -5,6 +5,7 @@ namespace ScheduleManager.Models
 {
     public partial class RootDataValid
     {
+        public int Id { get; set; }
         public string? Class { get; set; }
         public string? Subject { get; set; }
         public string? Room { get; set; }

@@ -10,18 +10,20 @@ namespace ScheduleManager.Logics.File
     {
         private readonly CheckValid _checkValid;
         private readonly IWebHostEnvironment _environment;
+        private readonly ScheduleManagerContext _context;
 
 
-        public FileHandle(CheckValid checkValid, IWebHostEnvironment environment)
+        public FileHandle(CheckValid checkValid, IWebHostEnvironment environment, ScheduleManagerContext context)
         {
             _checkValid = checkValid;
             _environment = environment;
+            _context = context;
         }
 
-        public (List<Models.RootDataValid>?, List<RootDataError>?) Read(string filePath)
+        public void Read(string filePath)
         {
             List<Models.RootDataValid>? listRootData = new List<Models.RootDataValid>();
-            List<RootDataError>? listDataError = new List<RootDataError>();
+            List<Models.RootDataError>? listDataError = new List<Models.RootDataError>();
 
             using (StreamReader reader = new StreamReader(filePath))
             {
@@ -46,10 +48,10 @@ namespace ScheduleManager.Logics.File
                     }
                     else
                     {
-                        RootDataError? rd = null;
+                        Models.RootDataError? rd = null;
                         if (result.Item3)
                         {
-                            rd = new RootDataError
+                            rd = new Models.RootDataError
                             {
                                 MissData = string.Join(",", values),
                                 Message = result.Item2 ?? "loi roi"
@@ -57,7 +59,7 @@ namespace ScheduleManager.Logics.File
                         }
                         else
                         {
-                            rd = new RootDataError
+                            rd = new Models.RootDataError
                             {
                                 Class = values[0] ?? "",
                                 Subject = values[1] ?? "",
@@ -71,7 +73,9 @@ namespace ScheduleManager.Logics.File
                     }
                 }
 
-                return (listRootData, listDataError);
+                _context.RootDataValids.AddRange(listRootData);
+                _context.RootDataErrors.AddRange(listDataError);
+                _context.SaveChanges();
             }
         }
 
