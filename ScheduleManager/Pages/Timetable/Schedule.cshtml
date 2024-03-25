@@ -10,7 +10,6 @@
 <form method="post">
     <select asp-items="@Model.listDateRange" asp-for="@Model.startDateRange"></select>
 
-
     <button type="submit">Filter</button>
 </form>
 
@@ -45,15 +44,17 @@
                     <td>
                         @foreach (var sche in schedules)
                         {
-                            @sche.TimeSlot.Details
-                            <span>-</span>
-                            @sche.Class.Name
-                            <br>
-                            @sche.Room.Name
-                            <span>-</span>
-                            @sche.Subject.Name
-                            <br>
-                            @sche.Teacher.Name
+                            <a asp-page="/Timetable/Detail" asp-route-slotId="@sche.Id">
+                                @sche.TimeSlot.Details
+                                <span>-</span>
+                                @sche.Class.Name
+                                <br>
+                                @sche.Room.Name
+                                <span>-</span>
+                                @sche.Subject.Name
+                                <br>
+                                @sche.Teacher.Name
+                            </a>
                             @if (schedules.Count > 1)
                             {
                                 <div>----------</div>

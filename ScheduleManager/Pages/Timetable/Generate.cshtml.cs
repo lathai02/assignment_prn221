@@ -23,7 +23,6 @@ namespace ScheduleManager.Pages.Timetable
         [BindProperty]
         public DateTime StartDate { get; set; }
 
-
         public void OnGet()
         {
         }
