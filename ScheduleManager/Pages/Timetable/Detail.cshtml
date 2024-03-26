@@ -1,4 +1,20 @@
 ﻿@page
 @model ScheduleManager.Pages.Timetable.DetailModel
-@{
-}
+
+<h1>Update or Delete</h1>
+
+<h2>Slot 1:</h2>
+<select asp-items="Model.classes1"></select>
+<select asp-items="Model.subjects1"></select>
+<select asp-items="Model.teachers1"></select>
+@* <select asp-items="Model.slots1"></select> *@
+<select asp-items="Model.rooms1"></select>
+<br>
+<h2>Slot 2:</h2>
+<select asp-items="Model.classes2"></select>
+<select asp-items="Model.subjects2"></select>
+<select asp-items="Model.teachers2"></select>
+@* <select asp-items="Model.slots2"></select> *@
+<select asp-items="Model.rooms2"></select>
+<br>
+<select asp-items="Model.timeSlots"></select>

@@ -56,7 +56,7 @@ namespace ScheduleManager.Logics.CheckValidRecord
             }
 
             // Time slot is invalid
-            if (!Enum.IsDefined(typeof(TimeSlot), _CurrentRecord[4]))
+            if (!Enum.IsDefined(typeof(ScheduleManager.Utils.Enum.TimeSlot), _CurrentRecord[4]))
             {
                 message = "Timeslot is invalid";
                 isValid = false;
