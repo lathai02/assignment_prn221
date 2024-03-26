@@ -96,6 +96,11 @@ namespace ScheduleManager.Logics.CheckValidRecord
                     message = "same time slot, same teacher";
                     isValid = false;
                 }
+
+                if (!isValid)
+                {
+                    return (false, message, flag);
+                }
             }
 
             return (true, message, flag);

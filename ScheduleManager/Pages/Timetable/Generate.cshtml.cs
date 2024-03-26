@@ -11,10 +11,12 @@ namespace ScheduleManager.Pages.Timetable
     public class GenerateModel : PageModel
     {
         private readonly InsertToDB _insertToDb;
+        private readonly ScheduleManagerContext _context;
 
-        public GenerateModel(InsertToDB insertToDb)
+        public GenerateModel(InsertToDB insertToDb, ScheduleManagerContext context)
         {
             _insertToDb = insertToDb;
+            _context = context;
         }
 
         [BindProperty]
@@ -29,6 +31,14 @@ namespace ScheduleManager.Pages.Timetable
 
         public IActionResult OnPost()
         {
+            AutoGenScheduleDatum autoGenScheduleDatum = new AutoGenScheduleDatum
+            {
+                NumberOfWeek = NumberOfWeek,
+                StartDate = StartDate,
+            };
+
+            _context.AutoGenScheduleData.Add(autoGenScheduleDatum);
+            _context.SaveChanges();
             _insertToDb.InsertData(NumberOfWeek, StartDate);
 
             return RedirectToPage("/Timetable/Schedule");

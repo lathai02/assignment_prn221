@@ -13,7 +13,7 @@
     <button type="submit">Filter</button>
 </form>
 
-
+<a asp-page="/Timetable/Add">Add Slot</a>
 <table>
     <tr>
         <th></th>
@@ -44,7 +44,7 @@
                     <td>
                         @foreach (var sche in schedules)
                         {
-                            <a asp-page="/Timetable/Detail" asp-route-slotId="@sche.Id">
+                            <a asp-page="/Timetable/ChooseOption" asp-route-slotId="@sche.Id">
                                 @sche.TimeSlot.Details
                                 <span>-</span>
                                 @sche.Class.Name

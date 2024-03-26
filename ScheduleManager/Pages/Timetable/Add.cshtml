@@ -1,0 +1,13 @@
+﻿@page
+@model ScheduleManager.Pages.Timetable.AddModel
+<h1>Add</h1>
+
+<br>
+<form method="post" asp-page-handler="Add">
+    <select asp-items="Model.classes" asp-for="classSelected"></select>
+    <select asp-items="Model.subjects" asp-for="subjectSelected"></select>
+    <select asp-items="Model.teachers" asp-for="teacherSelected"></select>
+    <select asp-items="Model.rooms" asp-for="roomSelected"></select>
+    <select asp-items="Model.timeSlots" asp-for="timeslotSelected"></select>
+    <button>Add</button>
+</form>

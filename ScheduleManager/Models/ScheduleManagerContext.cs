@@ -16,6 +16,7 @@ namespace ScheduleManager.Models
         {
         }
 
+        public virtual DbSet<AutoGenScheduleDatum> AutoGenScheduleData { get; set; } = null!;
         public virtual DbSet<GroupClass> GroupClasses { get; set; } = null!;
         public virtual DbSet<Room> Rooms { get; set; } = null!;
         public virtual DbSet<RootDataError> RootDataErrors { get; set; } = null!;
@@ -36,6 +37,17 @@ namespace ScheduleManager.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AutoGenScheduleDatum>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.NumberOfWeek).HasColumnName("numberOfWeek");
+
+                entity.Property(e => e.StartDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("startDate");
+            });
+
             modelBuilder.Entity<GroupClass>(entity =>
             {
                 entity.ToTable("GroupClass");

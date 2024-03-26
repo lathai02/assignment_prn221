@@ -1,0 +1,21 @@
+﻿@page
+@model ScheduleManager.Pages.Timetable.UpdateModel
+<h1>Update</h1>
+
+<br>
+<form method="post" asp-page-handler="Update">
+    <select asp-items="Model.classes" asp-for="classSelected"></select>
+    <select asp-items="Model.subjects" asp-for="subjectSelected"></select>
+    <select asp-items="Model.teachers" asp-for="teacherSelected"></select>
+    <select asp-items="Model.rooms" asp-for="roomSelected"></select>
+    <select asp-items="Model.timeSlots" asp-for="timeslotSelected"></select>
+    <button>Update</button>
+    <input type="hidden" value="@Model.slot1.Id" asp-for="slotId1" />
+    <input type="hidden" value="@Model.slot2.Id" asp-for="slotId2" />
+    <input type="hidden" value="@Model.rootDataIdCurrent.Id" asp-for="rootDataIdCurrentId" />
+</form>
+
+@if (Model.message != null)
+{
+    <div>@Model.message</div>
+}

@@ -7,26 +7,35 @@ using ScheduleManager.Utils.Enum;
 
 namespace ScheduleManager.Pages.Timetable
 {
-    public class DetailModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly ScheduleManagerContext _context;
 
         public Schedule slot1 { get; set; }
-        public SelectList classes1 { get; set; }
-        public SelectList subjects1 { get; set; }
-        public SelectList teachers1 { get; set; }
-        public SelectList slots1 { get; set; }
-        public SelectList rooms1 { get; set; }
+        public Schedule slot2 { get; set; }
+        public SelectList classes { get; set; }
+        public SelectList subjects { get; set; }
+        public SelectList teachers { get; set; }
+        public SelectList slots { get; set; }
+        public SelectList rooms { get; set; }
         public SelectList timeSlots { get; set; }
 
-        public Schedule slot2 { get; set; }
-        public SelectList classes2 { get; set; }
-        public SelectList subjects2 { get; set; }
-        public SelectList teachers2 { get; set; }
-        public SelectList slots2 { get; set; }
-        public SelectList rooms2 { get; set; }
+        [BindProperty]
+        public int slotId1 { get; set; }
+        [BindProperty]
+        public int slotId2 { get; set; }
+        [BindProperty]
+        public string classSelected { get; set; }
+        [BindProperty]
+        public string subjectSelected { get; set; }
+        [BindProperty]
+        public string teacherSelected { get; set; }
+        [BindProperty]
+        public string roomSelected { get; set; }
+        [BindProperty]
+        public string timeslotSelected { get; set; }
 
-        public DetailModel(ScheduleManagerContext context)
+        public DeleteModel(ScheduleManagerContext context)
         {
             _context = context;
         }
@@ -41,20 +50,15 @@ namespace ScheduleManager.Pages.Timetable
             var listRoom = _context.Rooms.ToList();
             var listTimeSlot = Enum.GetValues(typeof(TimeSlot)).Cast<TimeSlot>().ToList();
 
-            classes1 = new SelectList(listClass, nameof(GroupClass.Id), nameof(GroupClass.Name), slot1.ClassId);
-            subjects1 = new SelectList(listSubject, nameof(Models.Subject.Id), nameof(Models.Subject.Name), slot1.SubjectId);
-            teachers1 = new SelectList(listTeacher, nameof(Models.Teacher.Id), nameof(Models.Teacher.Name), slot1.TeacherId);
-            rooms1 = new SelectList(listRoom, nameof(Models.Room.Id), nameof(Models.Room.Name), slot1.RoomId);
-
-            classes2 = new SelectList(listClass, nameof(GroupClass.Id), nameof(GroupClass.Name), slot2.ClassId);
-            subjects2 = new SelectList(listSubject, nameof(Models.Subject.Id), nameof(Models.Subject.Name), slot2.SubjectId);
-            teachers2 = new SelectList(listTeacher, nameof(Models.Teacher.Id), nameof(Models.Teacher.Name), slot2.TeacherId);
-            rooms2 = new SelectList(listRoom, nameof(Models.Room.Id), nameof(Models.Room.Name), slot2.RoomId);
+            classes = new SelectList(listClass, nameof(GroupClass.Name), nameof(GroupClass.Name), slot1.Class.Name);
+            subjects = new SelectList(listSubject, nameof(Models.Subject.Name), nameof(Models.Subject.Name), slot1.Subject.Name);
+            teachers = new SelectList(listTeacher, nameof(Models.Teacher.Name), nameof(Models.Teacher.Name), slot1.Teacher.Name);
+            rooms = new SelectList(listRoom, nameof(Models.Room.Name), nameof(Models.Room.Name), slot1.Room.Name);
 
             var timeslotConvert = ConvertTimeslot(int.Parse(slot1.TimeSlot.Slot1), slot1.Date, int.Parse(slot2.TimeSlot.Slot1), slot2.Date);
-            TimeSlot timeSlotId;
-            Enum.TryParse(timeslotConvert, out timeSlotId);
-            timeSlots = new SelectList(GetListTimeSlot(listTimeSlot), nameof(Models.DTO.TimeSlot.Id), nameof(Models.DTO.TimeSlot.Name), (int)timeSlotId);
+            TimeSlot timeSlot;
+            Enum.TryParse(timeslotConvert, out timeSlot);
+            timeSlots = new SelectList(GetListTimeSlot(listTimeSlot), nameof(Models.DTO.TimeSlot.Name), nameof(Models.DTO.TimeSlot.Name), timeSlot);
         }
 
         private List<Models.DTO.TimeSlot> GetListTimeSlot(List<TimeSlot> listTimeSlot)
@@ -110,6 +114,20 @@ namespace ScheduleManager.Pages.Timetable
                 }
             }
             return result;
+        }
+
+        public IActionResult OnPostDelete()
+        {
+            var slot1Delete = _context.Schedules.FirstOrDefault(s => s.Id == slotId1);
+            var slot2Delete = _context.Schedules.FirstOrDefault(s => s.Id == slotId2);
+            var listToDelete = _context.Schedules.Where(s => (s.ClassId == slot1Delete.ClassId && s.SubjectId == slot1Delete.SubjectId && s.TeacherId == slot1Delete.TeacherId && s.RoomId == slot1Delete.RoomId) && (s.TimeSlotId == slot1Delete.TimeSlotId || s.TimeSlotId == slot2Delete.TimeSlotId)).ToList();
+            _context.Schedules.RemoveRange(listToDelete);
+
+            var rootDataDelete = _context.RootDataValids.FirstOrDefault(r => r.Class.Equals(classSelected) && r.Subject.Equals(subjectSelected) && r.Teacher.Equals(teacherSelected) && r.Room.Equals(roomSelected) && r.TimeSlot.Equals(timeslotSelected));
+            _context.RootDataValids.Remove(rootDataDelete);
+            _context.SaveChanges();
+
+            return RedirectToPage("/Timetable/Schedule");
         }
     }
 }

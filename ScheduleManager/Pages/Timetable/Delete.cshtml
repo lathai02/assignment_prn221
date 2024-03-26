@@ -1,0 +1,16 @@
+﻿@page
+@model ScheduleManager.Pages.Timetable.DeleteModel
+
+<h1>Delete</h1>
+
+<br>
+<form method="post" asp-page-handler="Delete">
+    <select asp-items="Model.classes" asp-for="classSelected"></select>
+    <select asp-items="Model.subjects" asp-for="subjectSelected"></select>
+    <select asp-items="Model.teachers" asp-for="teacherSelected"></select>
+    <select asp-items="Model.rooms" asp-for="roomSelected"></select>
+    <select asp-items="Model.timeSlots" asp-for="timeslotSelected"></select>
+    <button>Delete</button>
+    <input type="hidden" value="@Model.slot1.Id" asp-for="slotId1" />
+    <input type="hidden" value="@Model.slot2.Id" asp-for="slotId2" />
+</form>
